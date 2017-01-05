@@ -1,0 +1,18 @@
+<link name="#N">
+	<inertial>
+		<mass value='#M'/>
+		<inertia ixx="#I" ixy="0" ixz="0" iyy="#I" iyz="0" izz="#I" />
+	</inertial>
+	<visual>
+		<origin xyz="#P #P #P" rpy="0 0 0"/>
+		<geometry>
+			<box size="#L #L #L"/>
+		</geometry>
+	</visual>
+	<collision>
+		<origin xyz="#P #P #P" rpy="0 0 0"/>
+		<geometry>
+			<box size="#L #L #L"/>
+		</geometry>
+	</collision>
+</link>

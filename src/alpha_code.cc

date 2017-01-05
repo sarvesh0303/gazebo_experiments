@@ -1,0 +1,53 @@
+#include "../libs/defs.h"
+#define BOX_PATH "../templates/box.urdf"
+#define SPHERE_PATH "../templates/sphere.urdf"
+#define JOINT_PATH "../templates/joint.urdf"
+#define OUTPUT_PATH "../results/output.urdf"
+
+using namespace std;
+
+URDF_String::URDF_String(std::string model_name) {
+	this->adder.push_back("<robot name=\""+model_name+"\">\n");
+}
+
+void URDF_String::add_box(std::string name, double mass, double pos[], double dim[]) {
+	string inp_string = load_input(BOX_PATH);
+	double inertia[3];
+	for (int i = 0; i < 3; i++)
+		 inertia[i] = 1/12*mass*(pow(dim[(i+1)%3],2)+pow(dim[(i-1)%3],2))
+	inp_string = replace('N',vec_from_single(name),inp_string);
+	inp_string = replace('M',vec_from_single(mass),inp_string);
+	inp_string = replace('P',vec_from_arr(pos,3),inp_string);
+	inp_string = replace('L',vec_from_arr(dim,3),inp_string);
+	inp_string = replace('I',vec_from_arr(inertia,3),inp_string);
+	this->adder.push_back(inp_string);
+}
+
+void URDF_String::add_sphere(std::string name, double mass, double pos[], double rad) {
+	string inp_string = load_input(SPHERE_PATH);
+	double inertia[3];
+	for (int i = 0; i < 3; i++)
+		inertia[i] = 0.4*mass*pow(rad,2);
+	inp_string = replace('N',vec_from_single(name),inp_string);
+	inp_string = replace('M',vec_from_single(mass),inp_string);
+	inp_string = replace('P',vec_from_arr(pos,3),inp_string);
+	inp_string = replace('L',vec_from_single(rad),inp_string);
+	this->adder.push_back(inp_string);
+}
+
+void URDF_String::create_joint(std::string parent_link, std::string child_link, JOINT j, double pos[]) {
+	string inp_string = load_input(JOINT_PATH);
+	if ((int)j)
+		inp_string = replace('T',vec_from_single("revolute"),inp_string);
+	else
+		inp_string = replace('T',vec_from_single("fixed"),inp_string);
+
+}
+
+void URDF_String::load() {
+	this->adder.push_back("</robot>");
+	ofstream ofs(OUTPUT_PATH);
+	for (int i = 0; i < this->adder.size(); i++)
+		ofs << this->adder[i];
+	ofs.close();
+}
