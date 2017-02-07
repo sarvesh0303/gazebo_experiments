@@ -1,0 +1,20 @@
+<sdf version='1.6'>
+    <light name='$' type='spot'>
+      <pose frame=''>@ @ @ 0 -0 0</pose>
+      <diffuse>1 0 0 1</diffuse>
+      <specular>1 0 0 1</specular>
+      <direction># # #</direction>
+      <attenuation>
+        <range>2</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+</sdf>

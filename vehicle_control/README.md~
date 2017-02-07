@@ -1,0 +1,19 @@
+# gazebo_vehicle_control
+
+Currently a minimal Gazebo simulation for a four wheeled vehicle with Ackermann steering. No ROS integration yet. Joints are directly PID-controlled using gazebo plugins.
+
+This project is meant to be used as a template for simplistic simulations in gazebo, primarily for testing of motion planning and AI targeted simulations.
+
+World File:
+car2.world
+
+Plugin:
+push.cpp
+
+Instructions to use:
+Your work is cut out. Terminal in the folder
+$ sh run.sh
+Once gzserver starts running, start gzclient in another terminal window. And the simulation is ready to go.
+
+Software Requirement:
+Gazebo 7. ROS not required

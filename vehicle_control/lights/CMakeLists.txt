@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+
+find_package(gazebo REQUIRED)
+include_directories(${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})
+list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+
+#include_directories(include) -> needed only if additional libraries are being included
+
+#file(GLOB SOURCES "src/*.cpp") -> needed only if additional src code is being included
+
+add_library(lit SHARED ../lit.cpp ${SOURCES})
+target_link_libraries(lit ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
